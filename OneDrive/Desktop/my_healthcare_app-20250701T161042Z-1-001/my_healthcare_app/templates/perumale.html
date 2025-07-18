@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome - MedCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafd;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #1e1e4b;
+    }
+
+    header {
+      background-color: #ffffff;
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e0e0e0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #004aad;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #444;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #004aad;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 5rem 3rem 2rem;
+      gap: 2rem;
+      background-color: #ffffff;
+    }
+
+    .hero-text {
+      flex: 1 1 320px;
+      max-width: 520px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      color: #004aad;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 2rem;
+    }
+
+    .hero-text a.button {
+      background-color: #004aad;
+      color: white;
+      padding: 0.9rem 1.8rem;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 6rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      display: inline-block;
+    }
+
+    .hero-text a.button:hover {
+      background-color: #002f6c;
+      transform: translateY(-2px);
+    }
+
+    .hero-image {
+      flex: 1 1 320px;
+      text-align: center;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .features-section {
+      background-color: #ffffff;
+      padding: 4rem 3rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .card {
+      width: 280px;
+      min-height: 180px;
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      color: #004aad;
+    }
+
+    .card p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    footer {
+      margin-top: auto;
+      background-color: #eaf6fb;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        padding: 3rem 1.5rem;
+        text-align: center;
+      }
+
+      .hero-text a.button {
+        margin-left: 0;
+        margin-top: 1rem;
+      }
+
+      .features-section {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">MEDCARE</div>
+    <nav>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Your AI Health Companion</h1>
+      <p>MedCare is your intelligent, AI-powered health assistant that analyzes your symptoms and predicts potential illnesses using machine learning technology. Take control of your well-being in just a few simple steps.</p>
+      <a href="/questions" class="button">GET STARTED</a>
+    </div>
+    <div class="hero-image">
+      <img src="https://img.freepik.com/free-photo/medical-banner-with-doctor-working-laptop_23-2149611211.jpg" alt="Medical consultation">
+    </div>
+  </section>
+
+  <section class="features-section">
+    <div class="card">
+      <h3>Symptom Checker</h3>
+      <p>Input your symptoms to get instant, AI-powered predictions and possible diagnosis options.</p>
+    </div>
+    <div class="card">
+      <h3>Smart Insights</h3>
+      <p>Understand trends in your health and lifestyle based on data you provide.</p>
+    </div>
+    <div class="card">
+      <h3>Personal Guidance</h3>
+      <p>Receive intelligent suggestions and next steps tailored to your health profile.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 MedCare. All Rights Reserved.
+  </footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

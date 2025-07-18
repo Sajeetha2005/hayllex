@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Doctor Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f7f9fc;
+      color: #333;
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, #0060b1, #004aad);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+    }
+
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #004aad;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    .summary-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      flex: 1;
+      min-width: 250px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h3 {
+      color: #6f92ff;
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card p {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #333;
+      margin: 0;
+    }
+
+    .main-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+
+    .prediction {
+      flex: 1;
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.75rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .prediction:hover {
+      transform: translateY(-10px);
+    }
+
+    .prediction h3 {
+      color: #004aad;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .result {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #6f92ff;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    
+
+    .actions {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    .button {
+      background-color: #004aad;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #00337a;
+      transform: translateY(-5px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .summary-cards {
+        flex-direction: column;
+      }
+
+      .card {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+
+      .main-section {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .prediction {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <h1>AI Doctor</h1>
+    <div>Dashboard</div>
+  </div>
+
+  <div class="dashboard-container">
+    <div class="title">Health Assessment Summary</div>
+
+    <div class="summary-cards">
+      <div class="card">
+        <h3>Top Symptom</h3>
+        <p>{{ symptoms[0] if symptoms else "N/A" }}</p>
+      </div>
+      <div class="card">
+        <h3>Predicted Condition</h3>
+        <p>{{ prediction }}</p>
+      </div>
+      <div class="card">
+        <h3>Risk Level</h3>
+        <p>Moderate</p>
+      </div>
+    </div>
+
+    <div class="main-section">
+      <div class="prediction">
+        <h3>AI Diagnosis</h3>
+        <div class="result">{{ prediction }}</div>
+
+        <div class="actions">
+          <a href="/questions" class="button">Try Again</a>
+          <a href="/" class="button">Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+

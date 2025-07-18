@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Health Questionnaire</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('https://media.istockphoto.com/id/1428634687/photo/stethoscope.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      padding: 40px;
+      border-radius: 15px;
+      max-width: 800px;
+      width: 95%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      overflow-y: auto;
+      max-height: 95vh;
+    }
+
+    .progress-indicator {
+      background-color: #1E90FF;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      float: right;
+    }
+
+    h2 {
+      text-align: left;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .step {
+      display: none;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      background-color: #1E90FF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1C86EE;
+    }
+
+    .dropdown-label {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .symptom-dropdown {
+      position: relative;
+    }
+
+    .symptom-trigger {
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .symptom-options {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      max-height: 200px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      z-index: 2;
+    }
+
+    .symptom-dropdown:hover .symptom-options {
+      display: block;
+    }
+
+    .symptom-options label {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      cursor: pointer;
+      gap: 10px;
+    }
+
+    .symptom-options input[type="checkbox"] {
+      margin: 0;
+      width: 16px;
+      height: 16px;
+    }
+
+    .selected-symptoms {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      min-height: 40px;
+    }
+
+    .consent-wrapper {
+      margin-top: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+    }
+
+    .consent-wrapper input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="progress-indicator" id="progressIndicator">Step 1 of 3</div>
+    <h2>Health Questionnaire</h2>
+    <form id="multiStepForm" action="/predict" method="POST">
+      <!-- Step 1 -->
+      <div class="step active">
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="number" name="age" placeholder="Age" required />
+        <select name="gender" required>
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <input type="email" name="email" placeholder="Email" required />
+        <select name="alcohol">
+          <option value="">Do you consume alcohol?</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+        <select name="smoker">
+          <option value="">Do you smoke?</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+        <select name="blood_sugar">
+          <option value="">Blood Sugar Range (mg/dL)</option>
+          <option value="<70">Less than 70</option>
+          <option value="70-99">70–99</option>
+          <option value="100-125">100–125</option>
+          <option value=">126">126 or higher</option>
+        </select>
+        <label for="bp_range">Blood Pressure:</label>
+        <select name="bp_range" required>
+          <option value="low">Low</option>
+          <option value="normal">Normal</option>
+          <option value="prehypertension">Prehypertension</option>
+          <option value="stage1">Stage 1</option>
+          <option value="stage2">Stage 2</option>
+        </select><br>
+
+        <button type="button" onclick="nextStep(); window.scrollTo(0, 0);">Next</button>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <textarea name="allergies" placeholder="Known allergies"></textarea>
+        <textarea name="medications" placeholder="Current medications"></textarea>
+        <textarea name="surgical_history" placeholder="Surgical history"></textarea>
+        <textarea name="family_history" placeholder="Family health history"></textarea>
+        <textarea name="menstrual" placeholder="Menstrual cycle regularity (only for female)"></textarea>
+        <textarea name="diet" placeholder="Dietary habits"></textarea>
+        <textarea name="exercise" placeholder="Weekly physical activity (In hours)"></textarea>
+        <textarea name="sleep" placeholder="Sleep pattern (In hours)"></textarea>
+        <textarea name="stress" placeholder="Stress level (Low, Mid, High)"></textarea>
+        <button type="button" onclick="prevStep(); window.scrollTo(0, 0);">Back</button>
+        <button type="button" onclick="nextStep(); window.scrollTo(0, 0);">Next</button>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <label class="dropdown-label">Select your symptoms:</label>
+        <div class="symptom-dropdown">
+          <div class="symptom-trigger">Hover to select symptoms</div>
+          <div class="symptom-options" id="symptomOptions"></div>
+        </div>
+        <div class="selected-symptoms" id="selectedSymptoms"></div>
+
+        <div class="consent-wrapper">
+          <input type="checkbox" id="consent" name="consent" required />
+          <label for="consent">I consent to the collection and use of my health data.</label>
+        </div>
+
+        <button type="button" onclick="prevStep(); window.scrollTo(0, 0);">Back</button>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const steps = document.querySelectorAll('.step');
+    const progressIndicator = document.getElementById('progressIndicator');
+    let currentStep = 0;
+
+    function showStep(index) {
+      steps.forEach((step, i) => step.classList.toggle('active', i === index));
+      progressIndicator.textContent = `Step ${index + 1} of ${steps.length}`;
+    }
+
+    function nextStep() {
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    }
+
+    const rawSymptoms = `itching skin_rash nodal_skin_eruptions continuous_sneezing shivering chills joint_pain stomach_pain acidity ulcers_on_tongue muscle_wasting vomiting burning_micturition spotting_urination fatigue weight_gain anxiety cold_hands_and_feets mood_swings weight_loss restlessness lethargy patches_in_throat irregular_sugar_level cough high_fever sunken_eyes breathlessness sweating dehydration indigestion headache yellowish_skin dark_urine nausea loss_of_appetite pain_behind_the_eyes back_pain constipation abdominal_pain diarrhoea mild_fever yellow_urine yellowing_of_eyes acute_liver_failure fluid_overload swelling_of_stomach swelled_lymph_nodes malaise blurred_and_distorted_vision phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain weakness_in_limbs fast_heart_rate pain_during_bowel_movements pain_in_anal_region bloody_stool irritation_in_anus neck_pain dizziness cramps bruising obesity swollen_legs swollen_blood_vessels puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties excessive_hunger extra_marital_contacts drying_and_tingling_lips slurred_speech knee_pain hip_joint_pain muscle_weakness stiff_neck swelling_joints movement_stiffness spinning_movements loss_of_balance unsteadiness weakness_of_one_body_side loss_of_smell bladder_discomfort foul_smell_of_urine continuous_feel_of_urine passage_of_gases internal_itching toxic_look_(typhos) depression irritability muscle_pain altered_sensorium red_spots_over_body belly_pain abnormal_menstruation dischromic_patches watering_from_eyes increased_appetite polyuria family_history mucoid_sputum rusty_sputum lack_of_concentration visual_disturbances receiving_blood_transfusion receiving_unsterile_injections coma stomach_bleeding distention_of_abdomen history_of_alcohol_consumption fluid_overload blood_in_sputum prominent_veins_on_calf palpitations painful_walking pus_filled_pimples blackheads scurring skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails blister red_sore_around_nose yellow_crust_ooze prognosis`;
+
+    const symptomList = rawSymptoms.split(/\s+/);
+    const optionsContainer = document.getElementById('symptomOptions');
+    const selectedSymptomsDiv = document.getElementById('selectedSymptoms');
+    const selected = new Set();
+
+    symptomList.forEach(symptom => {
+      const pretty = symptom.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.name = 'symptoms[]';
+      input.value = symptom;
+      input.onchange = () => {
+        input.checked ? selected.add(pretty) : selected.delete(pretty);
+        selectedSymptomsDiv.textContent = Array.from(selected).join(', ');
+      };
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(' ' + pretty));
+      optionsContainer.appendChild(label);
+    });
+  </script>
+</body>
+</html>
+
